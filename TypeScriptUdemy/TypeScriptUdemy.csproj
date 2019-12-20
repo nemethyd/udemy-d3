@@ -81,6 +81,41 @@
     <Content Include="2.05.0\.vs\Udemy Minimal\v15\.suo" />
     <Content Include="2.05.0\.vs\Udemy Minimal\v16\.suo" />
     <Content Include="2.05.0\.vs\VSWorkspaceState.json" />
+    <Content Include="2.07\css\bootstrap.min.css" />
+    <Content Include="2.07\css\style.css" />
+    <Content Include="2.07\index.html" />
+    <Content Include="2.07\js\d3.min.js" />
+    <Content Include="2.07\js\main.js" />
+    <Content Include="2.08.0\css\bootstrap.min.css" />
+    <Content Include="2.08.0\css\style.css" />
+    <Content Include="2.08.0\index.html" />
+    <Content Include="2.08.0\js\d3.min.js" />
+    <Content Include="2.08.0\js\main.js" />
+    <Content Include="3.02\css\bootstrap.min.css" />
+    <Content Include="3.02\css\style.css" />
+    <Content Include="3.02\index.html" />
+    <Content Include="3.02\js\d3.min.js" />
+    <Content Include="3.02\js\main.js" />
+    <Content Include="3.06\css\bootstrap.min.css" />
+    <Content Include="3.06\css\style.css" />
+    <Content Include="3.06\index.html" />
+    <Content Include="3.06\js\d3.min.js" />
+    <Content Include="3.06\js\main.js" />
+    <Content Include="3.07\css\bootstrap.min.css" />
+    <Content Include="3.07\css\style.css" />
+    <Content Include="3.07\index.html" />
+    <Content Include="3.07\js\d3.min.js" />
+    <Content Include="3.07\js\main.js" />
+    <Content Include="3.09\css\bootstrap.min.css" />
+    <Content Include="3.09\css\style.css" />
+    <Content Include="3.09\index.html" />
+    <Content Include="3.09\js\d3.min.js" />
+    <Content Include="3.09\js\main.js" />
+    <Content Include="3.10\css\bootstrap.min.css" />
+    <Content Include="3.10\css\style.css" />
+    <Content Include="3.10\index.html" />
+    <Content Include="3.10\js\d3.min.js" />
+    <Content Include="3.10\js\main.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -93,6 +128,22 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="2.07\.DS_Store" />
+    <Content Include="2.07\data\ages.csv" />
+    <Content Include="2.07\data\ages.json" />
+    <Content Include="2.07\data\ages.tsv" />
+    <Content Include="2.08.0\.DS_Store" />
+    <Content Include="2.08.0\data\buildings.json" />
+    <Content Include="3.02\.DS_Store" />
+    <Content Include="3.02\data\buildings.json" />
+    <Content Include="3.06\.DS_Store" />
+    <Content Include="3.06\data\buildings.json" />
+    <Content Include="3.07\.DS_Store" />
+    <Content Include="3.07\data\buildings.json" />
+    <Content Include="3.09\.DS_Store" />
+    <Content Include="3.09\data\buildings.json" />
+    <Content Include="3.10\.DS_Store" />
+    <Content Include="3.10\data\buildings.json" />
     <None Include="packages.config">
       <DependentUpon>Web.Debug.config</DependentUpon>
     </None>
@@ -211,9 +262,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +306,7 @@
   <ItemGroup>
     <Folder Include=".cr\" />
     <Folder Include="2.05.0\obj\x86\Debug\TempPE\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
