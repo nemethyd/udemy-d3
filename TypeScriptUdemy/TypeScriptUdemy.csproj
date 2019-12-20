@@ -116,6 +116,12 @@
     <Content Include="3.10\index.html" />
     <Content Include="3.10\js\d3.min.js" />
     <Content Include="3.10\js\main.js" />
+    <Content Include="3.13.0\css\bootstrap.min.css" />
+    <Content Include="3.13.0\css\style.css" />
+    <Content Include="3.13.0\img\logo.png" />
+    <Content Include="3.13.0\index.html" />
+    <Content Include="3.13.0\js\d3.min.js" />
+    <Content Include="3.13.0\js\main.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -144,6 +150,9 @@
     <Content Include="3.09\data\buildings.json" />
     <Content Include="3.10\.DS_Store" />
     <Content Include="3.10\data\buildings.json" />
+    <Content Include="3.13.0\.DS_Store" />
+    <Content Include="3.13.0\data\revenues.json" />
+    <Content Include="3.13.0\js\.DS_Store" />
     <None Include="packages.config">
       <DependentUpon>Web.Debug.config</DependentUpon>
     </None>
