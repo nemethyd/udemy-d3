@@ -8,7 +8,11 @@ C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.CodeDom.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Drawing.Common.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Collections.Immutable.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\Microsoft.Build.Framework.dll
+C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Memory.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Threading.Tasks.Dataflow.dll
+C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Numerics.Vectors.dll
+C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Buffers.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.CodeDom.xml
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\cs\Microsoft.Build.resources.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\de\Microsoft.Build.resources.dll
@@ -24,13 +28,7 @@ C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\ru\Microsoft.Build.res
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\tr\Microsoft.Build.resources.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\zh-Hans\Microsoft.Build.resources.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\zh-Hant\Microsoft.Build.resources.dll
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\TypeScriptUdemy.csprojAssemblyReference.cache
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\NsUdemy.Properties.Resources.resources
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\TypeScriptUdemy.csproj.GenerateResource.cache
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\TypeScriptUdemy.csproj.CopyComplete
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\TsUdemy.dll
 C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\TsUdemy.pdb
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Memory.dll
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Numerics.Vectors.dll
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\bin\System.Buffers.dll
+C:\Users\Daniel\Source\Repos\udemy-d3\TypeScriptUdemy\obj\Debug\TypeScriptUdemy.csprojAssemblyReference.cache
