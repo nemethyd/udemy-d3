@@ -81,12 +81,23 @@
   <ItemGroup>
     <Content Include="6.02\css\bootstrap.min.css" />
     <Content Include="6.02\css\style.css" />
+    <Content Include="Resources\favicon.ico" />
     <Content Include="6.02\img\logo.png" />
     <Content Include="6.02\index.html" />
     <Content Include="6.02\js\bootstrap.min.js" />
     <Content Include="6.02\js\d3.min.js" />
     <Content Include="6.02\js\jquery.min.js" />
     <Content Include="6.02\js\main.js" />
+    <Content Include="6.04\css\bootstrap.min.css" />
+    <Content Include="6.04\css\d3-tip.css" />
+    <Content Include="6.04\css\style.css" />
+    <Content Include="6.04\img\logo.png" />
+    <Content Include="6.04\index.html" />
+    <Content Include="6.04\js\bootstrap.min.js" />
+    <Content Include="6.04\js\d3-tip.js" />
+    <Content Include="6.04\js\d3.min.js" />
+    <Content Include="6.04\js\jquery.min.js" />
+    <Content Include="6.04\js\main.js" />
     <Content Include="Resources\logo.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -102,6 +113,8 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="6.02\.DS_Store" />
     <Content Include="6.02\data\data.json" />
+    <Content Include="6.04\.DS_Store" />
+    <Content Include="6.04\data\data.json" />
     <None Include="packages.config">
       <DependentUpon>Web.Debug.config</DependentUpon>
     </None>
