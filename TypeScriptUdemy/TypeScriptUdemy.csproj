@@ -79,22 +79,14 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="5.10.0\.DS_Store" />
-    <Content Include="5.10.0\data\data.json" />
-    <Content Include="5.10.0\css\bootstrap.min.css" />
-    <Content Include="5.10.0\css\style.css" />
-    <Content Include="5.10.0\img\android-chrome-192x192.png" />
-    <Content Include="5.10.0\img\android-chrome-512x512.png" />
-    <Content Include="5.10.0\img\apple-touch-icon.png" />
-    <Content Include="5.10.0\img\favicon-16x16.png" />
-    <Content Include="5.10.0\img\favicon-32x32.png" />
-    <Content Include="5.10.0\img\favicon.ico" />
-    <Content Include="5.10.0\img\logo.png" />
-    <Content Include="5.10.0\index.html" />
-    <Content Include="5.10.0\js\bootstrap.min.js" />
-    <Content Include="5.10.0\js\d3.min.js" />
-    <Content Include="5.10.0\js\jquery.min.js" />
-    <Content Include="5.10.0\js\main.js" />
+    <Content Include="6.02\css\bootstrap.min.css" />
+    <Content Include="6.02\css\style.css" />
+    <Content Include="6.02\img\logo.png" />
+    <Content Include="6.02\index.html" />
+    <Content Include="6.02\js\bootstrap.min.js" />
+    <Content Include="6.02\js\d3.min.js" />
+    <Content Include="6.02\js\jquery.min.js" />
+    <Content Include="6.02\js\main.js" />
     <Content Include="Resources\logo.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -108,7 +100,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="5.10.0\css\bootstrap.min.css.map" />
+    <Content Include="6.02\.DS_Store" />
+    <Content Include="6.02\data\data.json" />
     <None Include="packages.config">
       <DependentUpon>Web.Debug.config</DependentUpon>
     </None>
