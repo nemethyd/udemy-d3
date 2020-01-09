@@ -1,7 +1,7 @@
 /*
 *    main.js
 *    Mastering Data Visualization with D3.js
-*    6.4 - Introducing tooltips
+*    6.7 - Adding a jQuery UI slider
 */
 
 var margin = { left:80, right:20, top:50, bottom:100 };
@@ -17,10 +17,12 @@ var g = d3.select("#chart-area")
             ", " + margin.top + ")");
 
 var time = 0;
+var interval;
+var formattedData;
 
 // Tooltip
 var tip = d3.tip().attr('class', 'd3-tip')
-    .html(d => {
+    .html(function(d) {
         var text = "<strong>Country:</strong> <span style='color:red'>" + d.country + "</span><br>";
         text += "<strong>Continent:</strong> <span style='color:red;text-transform:capitalize'>" + d.continent + "</span><br>";
         text += "<strong>Life Expectancy:</strong> <span style='color:red'>" + d3.format(".2f")(d.life_exp) + "</span><br>";
@@ -40,9 +42,8 @@ var y = d3.scaleLinear()
     .domain([0, 90]);
 var area = d3.scaleLinear()
     .range([25*Math.PI, 1500*Math.PI])
-    .domain([2000, 1400000000])
-var myColors = ["red"].concat(d3.schemePastel1);
-var continentColor = d3.scaleOrdinal(myColors);
+    .domain([2000, 1400000000]);
+var continentColor = d3.scaleOrdinal(["red"].concat(d3.schemePastel1));
 
 // Labels
 var xLabel = g.append("text")
@@ -77,18 +78,18 @@ g.append("g")
 
 // Y Axis
 var yAxisCall = d3.axisLeft(y)
-    .tickFormat(d => +d);
+    .tickFormat(function(d){ return +d; });
 g.append("g")
     .attr("class", "y axis")
     .call(yAxisCall);
 
-var areals = ["hungary","europe", "asia", "americas", "africa"];
+var continents = ["hungary","europe", "asia", "americas", "africa"];
 
 var legend = g.append("g")
     .attr("transform", "translate(" + (width - 10) + 
-        "," + (height - 145) + ")");
+        "," + (height - 150) + ")");
 
-areals.forEach((continent, i) => {
+continents.forEach(function(continent, i){
     var legendRow = legend.append("g")
         .attr("transform", "translate(0, " + (i * 20) + ")");
 
@@ -106,38 +107,86 @@ areals.forEach((continent, i) => {
 });
 
 d3.json("data/data.json").then(function(data){
-    console.log(data);
+    //console.log(data);
 
     // Clean data
-    const formattedData =
-        data.map(year => year["countries"]
-                .filter(country => country.income && country.life_exp)
-                .map(country => {
-                    country.income = +country.income;
-                    country.life_exp = +country.life_exp;
-                    return country;
-                })            
-        );
-
-    // Run the code every 0.1 second
-    d3.interval(function(){
-        // At the end of our data, loop back
-        time = (time < 214) ? time+1 : 0
-        update(formattedData[time]);            
-    }, 100);
+    formattedData = data.map(function(year){
+        return year["countries"].filter(function(country){
+            var dataExists = (country.income && country.life_exp);
+            return dataExists
+        }).map(function(country){
+            country.income = +country.income;
+            country.life_exp = +country.life_exp;
+            return country;            
+        })
+    });
 
     // First run of the visualization
     update(formattedData[0]);
 
 })
 
+$("#play-button")
+    .on("click", function(){
+        var button = $(this);
+        if (button.text() == "Play"){
+            button.text("Pause");
+            interval = setInterval(step, 100);            
+        }
+        else {
+            button.text("Play");
+            clearInterval(interval);
+        }
+    })
+
+$("#reset-button")
+    .on("click", function(){
+        time = 0;
+        update(formattedData[0]);
+    })
+
+$("#continent-select")
+    .on("change", function(){
+        update(formattedData[time]);
+    })
+
+$("#date-slider").slider({
+    max: 2014,
+    min: 1800,
+    step: 1,
+    slide: function(event, ui){
+        time = ui.value - 1800;
+        update(formattedData[time]);
+    }
+})
+
+function step(){
+    // At the end of our data, loop back
+    time = (time < 214) ? time+1 : 0
+    update(formattedData[time]);
+}
+
 function update(data) {
     // Standard transition time for the visualization
     var t = d3.transition()
         .duration(100);
 
+    var continent = $("#continent-select").val();
+
+    var data = data.filter(function(d){
+        if (continent == "all") { return true; }
+        else {
+            return d.continent == continent;
+        }
+    })
+
     // JOIN new data with old elements.
-    var circles = g.selectAll("circle").data(data, d=> d.country);
+    var circles = g.selectAll("circle").data(data, d => d.country);
+
+    circles.sort((a, b) => { a.country == "Hungary" ? 1 : b.country == "Hungary" ? -1 : Math.random() });
+
+    //console.log(circles);
+
 
     // EXIT old elements not present in new data.
     circles.exit()
@@ -148,15 +197,18 @@ function update(data) {
     circles.enter()
         .append("circle")
         .attr("class", "enter")
-        .attr("fill", d => d.country == "Hungary" ? "red" : continentColor(d.continent))
+        .attr("fill", function (d) { return d.country == "Hungary" ? "red" : continentColor(d.continent); })
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
         .merge(circles)
         .transition(t)
-            .attr("cy", d => y(d.life_exp))
-            .attr("cx", d =>x(d.income))
-            .attr("r", d => Math.sqrt(area(d.population) / Math.PI));
+            .attr("cy", function(d){ return y(d.life_exp); })
+            .attr("cx", function(d){ return x(d.income) })
+            .attr("r", function(d){ return Math.sqrt(area(d.population) / Math.PI) });
 
     // Update the time label
-    timeLabel.text(+(time + 1800))  
+    timeLabel.text(+(time + 1800))
+    $("#year")[0].innerHTML = +(time + 1800)
+
+    $("#date-slider").slider("value", +(time + 1800))
 }

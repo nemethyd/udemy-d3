@@ -40,8 +40,9 @@ var y = d3.scaleLinear()
     .domain([0, 90]);
 var area = d3.scaleLinear()
     .range([25*Math.PI, 1500*Math.PI])
-    .domain([2000, 1400000000]);
-var continentColor = d3.scaleOrdinal(d3.schemePastel1);
+    .domain([2000, 1400000000])
+var myColors = ["red"].concat(d3.schemePastel1);
+var continentColor = d3.scaleOrdinal(myColors);
 
 // Labels
 var xLabel = g.append("text")
@@ -76,7 +77,7 @@ g.append("g")
 
 // Y Axis
 var yAxisCall = d3.axisLeft(y)
-    .tickFormat(function(d){ return +d; });
+    .tickFormat(d => +d);
 g.append("g")
     .attr("class", "y axis")
     .call(yAxisCall);
@@ -87,7 +88,7 @@ var legend = g.append("g")
     .attr("transform", "translate(" + (width - 10) + 
         "," + (height - 145) + ")");
 
-areals.forEach(function(continent, i){
+areals.forEach((continent, i) => {
     var legendRow = legend.append("g")
         .attr("transform", "translate(0, " + (i * 20) + ")");
 
@@ -109,8 +110,7 @@ d3.json("data/data.json").then(function(data){
 
     // Clean data
     const formattedData =
-        data.map(year
-            => year["countries"]
+        data.map(year => year["countries"]
                 .filter(country => country.income && country.life_exp)
                 .map(country => {
                     country.income = +country.income;
@@ -137,9 +137,7 @@ function update(data) {
         .duration(100);
 
     // JOIN new data with old elements.
-    var circles = g.selectAll("circle").data(data, function(d){
-        return d.country;
-    });
+    var circles = g.selectAll("circle").data(data, d=> d.country);
 
     // EXIT old elements not present in new data.
     circles.exit()
@@ -150,15 +148,15 @@ function update(data) {
     circles.enter()
         .append("circle")
         .attr("class", "enter")
-        .attr("fill", function(d) { return continentColor(d.continent); })
+        .attr("fill", d => d.country == "Hungary" ? "red" : continentColor(d.continent))
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
         .merge(circles)
         .transition(t)
-            .attr("cy", function(d){ return y(d.life_exp); })
-            .attr("cx", function(d){ return x(d.income) })
-            .attr("r", function(d){ return Math.sqrt(area(d.population) / Math.PI) });
+            .attr("cy", d => y(d.life_exp))
+            .attr("cx", d =>x(d.income))
+            .attr("r", d => Math.sqrt(area(d.population) / Math.PI));
 
     // Update the time label
-    timeLabel.text(+(time + 1800))
+    timeLabel.text(+(time + 1800))  
 }

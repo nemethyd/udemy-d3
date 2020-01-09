@@ -1,7 +1,7 @@
 /*
 *    main.js
 *    Mastering Data Visualization with D3.js
-*    6.2 - Adding a legend
+*    6.5 - Event listeners and handlers in D3
 */
 
 var margin = { left:80, right:20, top:50, bottom:100 };
@@ -17,6 +17,20 @@ var g = d3.select("#chart-area")
             ", " + margin.top + ")");
 
 var time = 0;
+var interval;
+var formattedData;
+
+// Tooltip
+var tip = d3.tip().attr('class', 'd3-tip')
+    .html(function(d) {
+        var text = "<strong>Country:</strong> <span style='color:red'>" + d.country + "</span><br>";
+        text += "<strong>Continent:</strong> <span style='color:red;text-transform:capitalize'>" + d.continent + "</span><br>";
+        text += "<strong>Life Expectancy:</strong> <span style='color:red'>" + d3.format(".2f")(d.life_exp) + "</span><br>";
+        text += "<strong>GDP Per Capita:</strong> <span style='color:red'>" + d3.format("$,.0f")(d.income) + "</span><br>";
+        text += "<strong>Population:</strong> <span style='color:red'>" + d3.format(",.0f")(d.population) + "</span><br>";
+        return text;
+    });
+g.call(tip);
 
 // Scales
 var x = d3.scaleLog()
@@ -29,9 +43,7 @@ var y = d3.scaleLinear()
 var area = d3.scaleLinear()
     .range([25*Math.PI, 1500*Math.PI])
     .domain([2000, 1400000000]);
-var redArray = ["red"];
-var myColors = redArray.concat(d3.schemePastel1);
-var continentColor = d3.scaleOrdinal(myColors);
+var arealColor = d3.scaleOrdinal(["red"].concat(d3.schemePastel1));
 
 // Labels
 var xLabel = g.append("text")
@@ -66,70 +78,90 @@ g.append("g")
 
 // Y Axis
 var yAxisCall = d3.axisLeft(y)
-    .tickFormat(function(d){ return +d; });
+    .tickFormat(d => +d);
 g.append("g")
     .attr("class", "y axis")
     .call(yAxisCall);
 
-var continents = ["Hungary","europe", "asia", "americas", "africa"];
+var areals = ["Hungary","europe", "asia", "americas", "africa"];
 
 var legend = g.append("g")
     .attr("transform", "translate(" + (width - 10) + 
-        "," + (height - 140) + ")");
+        "," + (height - 150) + ")");
 
-continents.forEach(function(continent, i){
+areals.forEach((areal, i) => {
     var legendRow = legend.append("g")
         .attr("transform", "translate(0, " + (i * 20) + ")");
 
     legendRow.append("rect")
         .attr("width", 10)
         .attr("height", 10)
-        .attr("fill", continentColor(continent));
+        .attr("fill", arealColor(areal));
 
     legendRow.append("text")
         .attr("x", -10)
         .attr("y", 10)
         .attr("text-anchor", "end")
         .style("text-transform", "capitalize")
-        .text(continent);
+        .text(areal);
 });
 
-d3.json("data/data.json").then(function(data){
-    console.log(data);
+d3.json("data/data.json").then(data => {
+    //console.log(data);
 
     // Clean data
-    const formattedData = data.map(function(year){
-        return year["countries"].filter(function(country){
-            var dataExists = (country.income && country.life_exp);
-            return dataExists
-        }).map(function(country){
-            country.income = +country.income;
-            country.life_exp = +country.life_exp;
-            return country;            
-        })
-    });
-
-    // Run the code every 0.1 second
-    d3.interval(function(){
-        // At the end of our data, loop back
-        time = (time < 214) ? time+1 : 0
-        update(formattedData[time]);            
-    }, 100);
+    formattedData = data.map(year => 
+        year["countries"]
+            .filter(country => country.income && country.life_exp)
+            .map(country => { country.income = +country.income; country.life_exp = +country.life_exp; return country})
+    );
 
     // First run of the visualization
     update(formattedData[0]);
 
 })
 
+$("#play-button")
+    .on("click", function(){
+        var button = $(this);
+        if (button.text() == "Play"){
+            button.text("Pause");
+            interval = setInterval(step, 100);            
+        }
+        else {
+            button.text("Play");
+            clearInterval(interval);
+        }
+    })
+
+$("#reset-button")
+    .on("click", ()=>{
+        time = 0;
+        update(formattedData[0]);
+    })
+
+$("#area-select")
+    .on("change", ()=> update(formattedData[time]))
+
+function step(){
+    // At the end of our data, loop back
+    time = (time < 214) ? time+1 : 0
+    update(formattedData[time]);
+}
+
 function update(data) {
     // Standard transition time for the visualization
     var t = d3.transition()
         .duration(100);
 
+    var areal = $("#area-select").val();
+
+    //console.log(areal);
+
+    var data = data.filter(d => areal == "all" || d.continent == areal || d.country.toLowerCase() == areal )
+
     // JOIN new data with old elements.
-    var circles = g.selectAll("circle").data(data, function(d){
-        return d.country;
-    });
+    var circles = g.selectAll("circle").data(data, d => d.country);
 
     // EXIT old elements not present in new data.
     circles.exit()
@@ -140,9 +172,9 @@ function update(data) {
     circles.enter()
         .append("circle")
         .attr("class", "enter")
-        .attr("fill", function (d) {
-            return (d.country == "Hungary" ? "red" : continentColor(d.continent) )
-        })
+        .attr("fill", d => (d.country == areals[0] ? "red" : arealColor(d.continent)))
+        .on("mouseover", tip.show)
+        .on("mouseout", tip.hide)
         .merge(circles)
         .transition(t)
             .attr("cy", function(d){ return y(d.life_exp); })
